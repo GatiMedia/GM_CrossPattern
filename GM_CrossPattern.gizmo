@@ -2,17 +2,13 @@ Group {
  name GM_CrossPattern
  tile_color 0xd5ff1dff
  selected true
- xpos 1838
- ypos -5
+ xpos 1390
+ ypos -442
  addUserKnob {20 User}
- addUserKnob {6 red +STARTLINE}
- red true
- addUserKnob {6 green -STARTLINE}
- green true
- addUserKnob {6 blue -STARTLINE}
- blue true
- addUserKnob {6 alpha -STARTLINE}
- alpha true
+ addUserKnob {6 over_original l "Over Original Image" +STARTLINE}
+ over_original true
+ addUserKnob {6 keep_alpha l "Keep Original Alpha" -STARTLINE}
+ keep_alpha true
  addUserKnob {26 ""}
  addUserKnob {41 operation T CP_Merge.operation}
  addUserKnob {26 ""}
@@ -26,9 +22,10 @@ Group {
  addUserKnob {41 offset2 l Offset2 T CP_Expression.offset2}
  addUserKnob {41 speed l Speed T CP_Expression.speed}
  addUserKnob {41 speed2 l Speed2 T CP_Expression.speed2}
+ addUserKnob {41 multiply l Color T CP_Grade2.multiply}
  addUserKnob {26 ""}
  addUserKnob {7 roundness l Roundness R 0 100}
- roundness 50
+ roundness 30
  addUserKnob {7 contr l Contrast}
  contr 1
  addUserKnob {26 ""}
@@ -46,7 +43,35 @@ Group {
   xpos 104
   ypos -366
  }
-set Nc2f36380 [stack 0]
+set N362ed880 [stack 0]
+ Dot {
+  name Dot2
+  xpos 434
+  ypos -366
+ }
+set N362ed500 [stack 0]
+ Dot {
+  name Dot7
+  xpos 654
+  ypos -366
+ }
+ Dot {
+  name Dot8
+  xpos 654
+  ypos 714
+ }
+set N362ece00 [stack 0]
+ Dot {
+  name Dot10
+  xpos 764
+  ypos 714
+ }
+ Dot {
+  name Dot9
+  xpos 764
+  ypos 1098
+ }
+push $N362ed880
  Expression {
   expr0 "ceil((\[value type](y/size\[if \{\[numvalue direction] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset)*(speed/100)))) + (\[value type](x/size\[if \{\[numvalue direction] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset)*(speed/100)))))"
   expr1 "ceil((\[value type2](y/size2\[if \{\[numvalue direction2] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset2)*(speed2/100)))) / (\[value type2](x/size2\[if \{\[numvalue direction2] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset2)*(speed2/100)))))"
@@ -56,22 +81,21 @@ set Nc2f36380 [stack 0]
   addUserKnob {20 User}
   addUserKnob {4 type l Type M {sin cos tan}}
   addUserKnob {4 type2 l Type2 M {sin cos tan}}
-  type2 cos
   addUserKnob {4 direction l Direction M {Up Down ""}}
   addUserKnob {4 direction2 l Direction2 M {Up Down}}
   direction2 Down
   addUserKnob {7 size l Size R 0 100}
   size 30
   addUserKnob {7 size2 l Size2 R 0 100}
-  size2 40
+  size2 50
   addUserKnob {7 offset l Offset R 0 100}
   addUserKnob {7 offset2 l Offset2 R 0 100}
   addUserKnob {7 speed l Speed R 0 100}
   speed 5
   addUserKnob {7 speed2 l Speed2 R 0 100}
-  speed2 10
+  speed2 5
  }
-set N53c00 [stack 0]
+set N362ec380 [stack 0]
  Shuffle {
   green black
   blue black
@@ -85,7 +109,7 @@ set N53c00 [stack 0]
   xpos 70
   ypos -88
  }
-push $N53c00
+push $N362ec380
  Shuffle {
   red green
   green black
@@ -102,7 +126,7 @@ push $N53c00
  }
  Merge2 {
   inputs 2
-  operation exclusion
+  operation multiply
   Achannels {rgba.red -rgba.green -rgba.blue rgba.alpha}
   Bchannels {rgba.red rgba.green -rgba.blue rgba.alpha}
   output rgb
@@ -140,20 +164,20 @@ push $N53c00
    name Input
    xpos 0
   }
-set Nc5d7c00 [stack 0]
+set N36308380 [stack 0]
   Dot {
    name Dot1
    xpos 366
    ypos 5
   }
-set Nc5d7880 [stack 0]
-push $Nc5d7880
+set N36308000 [stack 0]
+push $N36308000
   Invert {
    name Invert1
    xpos 177
    ypos 34
   }
-push $Nc5d7880
+push $N36308000
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -185,7 +209,7 @@ push $Nc5d7880
    addUserKnob {7 JSplineVFake}
    JSplineVFake {{curve i l 0.9958 k x5 0.95 0.8 x20 0.5 x40 0.3 x80 0.2 l x200 0.1}}
   }
-set Nc5d6700 [stack 0]
+set N36346e00 [stack 0]
   Merge2 {
    inputs 2
    operation minus
@@ -193,7 +217,7 @@ set Nc5d6700 [stack 0]
    xpos 332
    ypos 218
   }
-push $Nc5d6700
+push $N36346e00
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -212,7 +236,7 @@ push $Nc5d6700
    xpos 177
    ypos 446
   }
-push $Nc5d7c00
+push $N36308380
   ShuffleCopy {
    inputs 2
    name ShuffleCopy1
@@ -247,20 +271,20 @@ push $Nc5d7c00
    name Input
    xpos 0
   }
-set N77776a80 [stack 0]
+set N36385180 [stack 0]
   Dot {
    name Dot1
    xpos 366
    ypos 5
   }
-set N77776700 [stack 0]
-push $N77776700
+set N36384e00 [stack 0]
+push $N36384e00
   Invert {
    name Invert1
    xpos 177
    ypos 34
   }
-push $N77776700
+push $N36384e00
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -292,7 +316,7 @@ push $N77776700
    addUserKnob {7 JSplineVFake}
    JSplineVFake {{curve i l 0.9958 k x5 0.95 0.8 x20 0.5 x40 0.3 x80 0.2 l x200 0.1}}
   }
-set Ne0eb9500 [stack 0]
+set N363bdc00 [stack 0]
   Merge2 {
    inputs 2
    operation minus
@@ -300,7 +324,7 @@ set Ne0eb9500 [stack 0]
    xpos 332
    ypos 218
   }
-push $Ne0eb9500
+push $N363bdc00
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -319,7 +343,7 @@ push $Ne0eb9500
    xpos 177
    ypos 446
   }
-push $N77776a80
+push $N36385180
   ShuffleCopy {
    inputs 2
    name ShuffleCopy1
@@ -365,33 +389,28 @@ push $N77776a80
   xpos 104
   ypos 570
  }
-set N9dfeee00 [stack 0]
+set N36403500 [stack 0]
  Dot {
   name Dot4
   xpos 104
   ypos 642
  }
-set N9dfeea80 [stack 0]
+set N36403180 [stack 0]
  Dot {
   name Dot5
   xpos 104
   ypos 714
  }
-set N9dfee700 [stack 0]
+set N36402e00 [stack 0]
  Dot {
   name Dot6
   xpos 104
-  ypos 786
+  ypos 834
  }
-push $N9dfee700
-push $N9dfeea80
-push $N9dfeee00
-push $Nc2f36380
- Dot {
-  name Dot2
-  xpos 434
-  ypos -366
- }
+push $N36402e00
+push $N36403180
+push $N36403500
+push $N362ed500
  Remove {
   name CP_Remove
   xpos 400
@@ -427,6 +446,12 @@ push $Nc2f36380
   ypos 704
   disable {{!parent.blue}}
  }
+ Grade {
+  name CP_Grade2
+  selected true
+  xpos 400
+  ypos 758
+ }
  Copy {
   inputs 2
   from0 rgba.alpha
@@ -434,12 +459,43 @@ push $Nc2f36380
   name CP_CopyA
   tile_color 0x999999ff
   xpos 400
-  ypos 776
+  ypos 824
   disable {{!parent.alpha}}
+ }
+ Premult {
+  name Premult1
+  xpos 400
+  ypos 902
+ }
+set N36435180 [stack 0]
+push $N36435180
+push $N362ece00
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos 620
+  ypos 902
+ }
+ Switch {
+  inputs 2
+  which {{!parent.over_original}}
+  name Switch1
+  label "Which: \[value which]"
+  xpos 510
+  ypos 992
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos 510
+  ypos 1088
+  disable {{!parent.keep_alpha}}
  }
  Output {
   name Output1
-  xpos 400
-  ypos 974
+  xpos 510
+  ypos 1190
  }
 end_group
