@@ -1,9 +1,9 @@
 Group {
- name GM_CrossPattern
+ name GM_CrossPattern1
  tile_color 0xd5ff1dff
  selected true
- xpos 2050
- ypos 22071
+ xpos 4910
+ ypos 542
  addUserKnob {20 User}
  addUserKnob {4 modes l Mode M {"Only Pattern" "Pattern Over Image" "Distorted Image" STMap "" ""}}
  addUserKnob {6 keep_alpha l "Keep Original Alpha" -STARTLINE}
@@ -22,12 +22,13 @@ Group {
  addUserKnob {41 speed l Speed T CP_Expression.speed}
  addUserKnob {41 speed2 l Speed2 T CP_Expression.speed2}
  addUserKnob {41 multiply l Color T CP_Grade2.multiply}
+ addUserKnob {6 invert l Invert +STARTLINE}
  addUserKnob {26 ""}
  addUserKnob {7 roundness l Roundness R 0 100}
  roundness 30
  addUserKnob {7 contr l Contrast}
  addUserKnob {7 blur l Blur R 0 100}
- addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 ""}
  addUserKnob {41 mix l Mix T Merge1.mix}
  addUserKnob {26 ""}
  addUserKnob {26 TEXT l "" +STARTLINE T "<font color=#808080 size=\"5\" >1.01 version</font>"}
@@ -37,26 +38,26 @@ Group {
   inputs 0
   name Input
   xpos 70
-  ypos -633
+  ypos -634
  }
  Dot {
   name Dot1
   xpos 104
   ypos -534
  }
-set N30cc8d00 [stack 0]
+set N33273500 [stack 0]
  Remove {
   name CP_Remove1
   xpos 70
-  ypos -327
+  ypos -328
  }
-set Nd7e08990 [stack 0]
+set N33273180 [stack 0]
  Expression {
   expr0 "ceil((\[value type](y/size\[if \{\[numvalue direction] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset)*(speed/100)))) + (\[value type](x/size\[if \{\[numvalue direction] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset)*(speed/100)))))"
   expr1 "ceil((\[value type2](y/size2\[if \{\[numvalue direction2] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset2)*(speed2/100)))) / (\[value type2](x/size2\[if \{\[numvalue direction2] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset2)*(speed2/100)))))"
   name CP_Expression
   xpos 70
-  ypos -273
+  ypos -274
   addUserKnob {20 User}
   addUserKnob {4 type l Type M {sin cos tan}}
   addUserKnob {4 type2 l Type2 M {sin cos tan}}
@@ -74,21 +75,21 @@ set Nd7e08990 [stack 0]
   addUserKnob {7 speed2 l Speed2 R 0 100}
   speed2 5
  }
-set N30d00b90 [stack 0]
+set N33272e00 [stack 0]
  Shuffle {
   green black
   blue black
   alpha black
   name CP_ShuffleR
   xpos -40
-  ypos -153
+  ypos -154
  }
  Clamp {
   name CP_Clamp1
   xpos -40
-  ypos -87
+  ypos -88
  }
-push $N30d00b90
+push $N33272e00
  Shuffle {
   red green
   green black
@@ -96,12 +97,12 @@ push $N30d00b90
   alpha black
   name CP_ShuffleG
   xpos 180
-  ypos -153
+  ypos -154
  }
  Clamp {
   name CP_Clamp2
   xpos 180
-  ypos -87
+  ypos -88
  }
  Merge2 {
   inputs 2
@@ -111,12 +112,12 @@ push $N30d00b90
   output rgb
   name CP_Merge
   xpos 70
-  ypos 15
+  ypos 14
  }
  Clamp {
   name CP_Clamp3
   xpos 70
-  ypos 81
+  ypos 56
  }
  Shuffle {
   red black
@@ -125,13 +126,19 @@ push $N30d00b90
   alpha red
   name Shuffle4
   xpos 70
-  ypos 159
+  ypos 134
+ }
+ Invert {
+  name CP_Invert
+  xpos 70
+  ypos 176
+  disable {{!invert}}
  }
  Group {
   name key_chew
   help "======== KeyChew beta ========\n=============================\n\nThis is a port of the KeyChew macro for Shake to Nuke.\n\nThere might be tiny differences on the results given in both apps. Some of them are caused by the internal algorithms of each app, and others by the way I faked the JSplineV\nexpression of Shake in Nuke. If you know a better way to solve this, let\nme know!!\n\n=============================\n             2009 Cuco Bures\n============================="
   xpos 70
-  ypos 231
+  ypos 230
   addUserKnob {20 Controls}
   addUserKnob {7 chew t "\t\t" R -200 200}
   chew {{-parent.roundness}}
@@ -143,20 +150,20 @@ push $N30d00b90
    name Input
    xpos 0
   }
-set N1c93cf70 [stack 0]
+set N2facae00 [stack 0]
   Dot {
    name Dot1
    xpos 366
    ypos 5
   }
-set N2812d250 [stack 0]
-push $N2812d250
+set N2facaa80 [stack 0]
+push $N2facaa80
   Invert {
    name Invert1
    xpos 177
    ypos 34
   }
-push $N2812d250
+push $N2facaa80
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -188,7 +195,7 @@ push $N2812d250
    addUserKnob {7 JSplineVFake}
    JSplineVFake {{curve i l 0.9958 k x5 0.95 0.8 x20 0.5 x40 0.3 x80 0.2 l x200 0.1}}
   }
-set N28161da0 [stack 0]
+set N334c3880 [stack 0]
   Merge2 {
    inputs 2
    operation minus
@@ -196,7 +203,7 @@ set N28161da0 [stack 0]
    xpos 332
    ypos 218
   }
-push $N28161da0
+push $N334c3880
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -215,7 +222,7 @@ push $N28161da0
    xpos 177
    ypos 446
   }
-push $N1c93cf70
+push $N2facae00
   ShuffleCopy {
    inputs 2
    name ShuffleCopy1
@@ -238,7 +245,7 @@ push $N1c93cf70
   name key_chew1
   help "======== KeyChew beta ========\n=============================\n\nThis is a port of the KeyChew macro for Shake to Nuke.\n\nThere might be tiny differences on the results given in both apps. Some of them are caused by the internal algorithms of each app, and others by the way I faked the JSplineV\nexpression of Shake in Nuke. If you know a better way to solve this, let\nme know!!\n\n=============================\n             2009 Cuco Bures\n============================="
   xpos 70
-  ypos 303
+  ypos 302
   addUserKnob {20 Controls}
   addUserKnob {7 chew t "\t\t" R -200 200}
   chew {{-parent.key_chew.chew}}
@@ -250,20 +257,20 @@ push $N1c93cf70
    name Input
    xpos 0
   }
-set N291207c0 [stack 0]
+set N33553c00 [stack 0]
   Dot {
    name Dot1
    xpos 366
    ypos 5
   }
-set N29124f70 [stack 0]
-push $N29124f70
+set N33553880 [stack 0]
+push $N33553880
   Invert {
    name Invert1
    xpos 177
    ypos 34
   }
-push $N29124f70
+push $N33553880
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -295,7 +302,7 @@ push $N29124f70
    addUserKnob {7 JSplineVFake}
    JSplineVFake {{curve i l 0.9958 k x5 0.95 0.8 x20 0.5 x40 0.3 x80 0.2 l x200 0.1}}
   }
-set N29159d30 [stack 0]
+set N33552700 [stack 0]
   Merge2 {
    inputs 2
    operation minus
@@ -303,7 +310,7 @@ set N29159d30 [stack 0]
    xpos 332
    ypos 218
   }
-push $N29159d30
+push $N33552700
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -322,7 +329,7 @@ push $N29159d30
    xpos 177
    ypos 446
   }
-push $N291207c0
+push $N33553c00
   ShuffleCopy {
    inputs 2
    name ShuffleCopy1
@@ -344,7 +351,7 @@ push $N291207c0
  Clamp {
   name CP_Clamp4
   xpos 70
-  ypos 369
+  ypos 368
  }
  Grade {
   channels all
@@ -353,7 +360,7 @@ push $N291207c0
   white_clamp true
   name CP_Grade
   xpos 70
-  ypos 441
+  ypos 440
  }
  Shuffle {
   red alpha
@@ -361,22 +368,22 @@ push $N291207c0
   blue alpha
   name Shuffle5
   xpos 70
-  ypos 495
+  ypos 494
  }
  Dot {
   name Dot3
   xpos 104
   ypos 570
  }
-set N2f03f7c0 [stack 0]
+set N2f8e6000 [stack 0]
  Dot {
   name Dot4
   xpos 104
   ypos 642
  }
-set N2f044190 [stack 0]
-push $N2f03f7c0
-push $Nd7e08990
+set N425d9c00 [stack 0]
+push $N2f8e6000
+push $N33273180
  Dot {
   name Dot8
   tile_color 0x949494ff
@@ -385,7 +392,7 @@ push $Nd7e08990
   xpos 434
   ypos -318
  }
-set Nba018480 [stack 0]
+set N425d9880 [stack 0]
  Copy {
   inputs 2
   from0 rgba.alpha
@@ -393,8 +400,7 @@ set Nba018480 [stack 0]
   name CP_CopyR
   tile_color 0xff0000ff
   xpos 400
-  ypos 561
-  disable {{!parent.red}}
+  ypos 560
  }
  Copy {
   inputs 2
@@ -403,18 +409,17 @@ set Nba018480 [stack 0]
   name CP_CopyG
   tile_color 0x1fff00ff
   xpos 400
-  ypos 633
-  disable {{!parent.green}}
+  ypos 632
  }
-set N286b3a90 [stack 0]
+set N425d9180 [stack 0]
  Blur {
   size {{blur}}
   name Blur1
   label "Size: \[value size]"
   xpos 730
-  ypos 627
+  ypos 625
  }
-push $Nba018480
+push $N425d9880
  Dot {
   name Dot2
   tile_color 0x949494ff
@@ -428,19 +433,18 @@ push $Nba018480
   expr1 (y+0.5)/height
   name Expression1
   xpos 1170
-  ypos -57
+  ypos -58
  }
  Merge2 {
   inputs 2
-  mix {{parent.Merge1.mix/10}}
+  mix {{Merge1.mix/5}}
   name Merge2
-  selected true
   xpos 1170
-  ypos 639
+  ypos 638
  }
-set N6917ffb0 [stack 0]
-push $N6917ffb0
-push $N30cc8d00
+set N425d8000 [stack 0]
+push $N425d8000
+push $N33273500
  Dot {
   name Dot7
   xpos 984
@@ -451,7 +455,7 @@ push $N30cc8d00
   name Shuffle1
   label "\[value in]"
   xpos 950
-  ypos 681
+  ypos 776
   disable {{keep_alpha}}
  }
  Dot {
@@ -462,29 +466,29 @@ push $N30cc8d00
   xpos 984
   ypos 978
  }
-set N26e40d60 [stack 0]
+set N42609500 [stack 0]
  STMap {
   inputs 2
   uv rgb
   name STMap1
   label "UV: \[value uv]"
   xpos 1170
-  ypos 963
+  ypos 961
  }
-push $N2f044190
+push $N425d9c00
  Dot {
   name Dot5
   xpos 104
   ypos 714
  }
-set N2f048a90 [stack 0]
+set N42608e00 [stack 0]
  Dot {
   name Dot6
   xpos 104
   ypos 834
  }
-push $N2f048a90
-push $N286b3a90
+push $N42608e00
+push $N425d9180
  Copy {
   inputs 2
   from0 rgba.alpha
@@ -492,13 +496,12 @@ push $N286b3a90
   name CP_CopyB
   tile_color 0x3fffff
   xpos 400
-  ypos 705
-  disable {{!parent.blue}}
+  ypos 704
  }
  Grade {
   name CP_Grade2
   xpos 400
-  ypos 759
+  ypos 758
  }
  Copy {
   inputs 2
@@ -507,42 +510,41 @@ push $N286b3a90
   name CP_CopyA
   tile_color 0x999999ff
   xpos 400
-  ypos 825
-  disable {{!parent.alpha}}
+  ypos 824
  }
  Blur {
-  size {{parent.Blur1.size}}
+  size {{Blur1.size}}
   name Blur2
   label "Size: \[value size]"
   xpos 400
-  ypos 915
+  ypos 913
  }
  Premult {
   name Premult1
   xpos 400
-  ypos 1071
+  ypos 1070
  }
-set N286ece00 [stack 0]
-push $N26e40d60
+set N4263b880 [stack 0]
+push $N42609500
  Merge2 {
   inputs 2
   also_merge all
   name Merge1
   xpos 950
-  ypos 1071
+  ypos 1070
  }
-push $N286ece00
+push $N4263b880
  Switch {
   inputs 4
-  which {{parent.modes}}
+  which {{modes}}
   name Switch1
   label "Which: \[value which]"
   xpos 950
-  ypos 1233
+  ypos 1232
  }
  Output {
   name Output1
   xpos 950
-  ypos 1455
+  ypos 1454
  }
 end_group
