@@ -5,11 +5,11 @@ Group {
  xpos 2050
  ypos 22071
  addUserKnob {20 User}
- addUserKnob {4 modes l Mode M {"Only Pattern" "Pattern Over Image" "Distorted Image" ""}}
+ addUserKnob {4 modes l Mode M {"Only Pattern" "Pattern Over Image" "Distorted Image" STMap "" ""}}
  addUserKnob {6 keep_alpha l "Keep Original Alpha" -STARTLINE}
  keep_alpha true
  addUserKnob {26 ""}
- addUserKnob {41 Operation T CP_Merge.operation}
+ addUserKnob {41 operation l Operation T CP_Merge.operation}
  addUserKnob {26 ""}
  addUserKnob {41 type l Type T CP_Expression.type}
  addUserKnob {41 type2 l Type2 T CP_Expression.type2}
@@ -434,9 +434,12 @@ push $Nba018480
   inputs 2
   mix {{parent.Merge1.mix/10}}
   name Merge2
+  selected true
   xpos 1170
   ypos 639
  }
+set N6917ffb0 [stack 0]
+push $N6917ffb0
 push $N30cc8d00
  Dot {
   name Dot7
@@ -530,7 +533,7 @@ push $N26e40d60
  }
 push $N286ece00
  Switch {
-  inputs 3
+  inputs 4
   which {{parent.modes}}
   name Switch1
   label "Which: \[value which]"
@@ -539,7 +542,6 @@ push $N286ece00
  }
  Output {
   name Output1
-  selected true
   xpos 950
   ypos 1455
  }
