@@ -1,15 +1,14 @@
 Group {
  name GM_CrossPattern
  tile_color 0xd5ff1dff
- selected true
- xpos 4910
- ypos 542
+ xpos 3150
+ ypos -298
  addUserKnob {20 User}
- addUserKnob {4 modes l Mode M {"Only Pattern" "Pattern Over Image" "Distorted Image" STMap "" ""}}
+ addUserKnob {4 output l Output M {"Only Pattern" "Pattern Over Image" "Distorted Image" STMap "" "" ""}}
  addUserKnob {6 keep_alpha l "Keep Original Alpha" -STARTLINE}
  keep_alpha true
  addUserKnob {26 ""}
- addUserKnob {41 operation l Operation T CP_Merge.operation}
+ addUserKnob {41 operation1 l Operation T Merge_Proxy.operation1}
  addUserKnob {26 ""}
  addUserKnob {41 type l Type T CP_Expression.type}
  addUserKnob {41 type2 l Type2 T CP_Expression.type2}
@@ -45,13 +44,13 @@ Group {
   xpos 104
   ypos -534
  }
-set N33273500 [stack 0]
+set Ncb78f500 [stack 0]
  Remove {
   name CP_Remove1
   xpos 70
   ypos -328
  }
-set N33273180 [stack 0]
+set Ncb78f180 [stack 0]
  Expression {
   expr0 "ceil((\[value type](y/size\[if \{\[numvalue direction] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset)*(speed/100)))) + (\[value type](x/size\[if \{\[numvalue direction] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset)*(speed/100)))))"
   expr1 "ceil((\[value type2](y/size2\[if \{\[numvalue direction2] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset2)*(speed2/100)))) / (\[value type2](x/size2\[if \{\[numvalue direction2] == 0\} \{return \"-\"\} else \{return \"+\"\}]((frame+offset2)*(speed2/100)))))"
@@ -75,7 +74,7 @@ set N33273180 [stack 0]
   addUserKnob {7 speed2 l Speed2 R 0 100}
   speed2 5
  }
-set N33272e00 [stack 0]
+set Ncb78ee00 [stack 0]
  Shuffle {
   green black
   blue black
@@ -89,7 +88,7 @@ set N33272e00 [stack 0]
   xpos -40
   ypos -88
  }
-push $N33272e00
+push $Ncb78ee00
  Shuffle {
   red green
   green black
@@ -106,7 +105,7 @@ push $N33272e00
  }
  Merge2 {
   inputs 2
-  operation multiply
+  operation {{Merge_Proxy.operation1}}
   Achannels {rgba.red -rgba.green -rgba.blue rgba.alpha}
   Bchannels {rgba.red rgba.green -rgba.blue rgba.alpha}
   output rgb
@@ -150,20 +149,20 @@ push $N33272e00
    name Input
    xpos 0
   }
-set N2facae00 [stack 0]
+set Neb74a80 [stack 0]
   Dot {
    name Dot1
    xpos 366
    ypos 5
   }
-set N2facaa80 [stack 0]
-push $N2facaa80
+set Neb74700 [stack 0]
+push $Neb74700
   Invert {
    name Invert1
    xpos 177
    ypos 34
   }
-push $N2facaa80
+push $Neb74700
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -195,7 +194,7 @@ push $N2facaa80
    addUserKnob {7 JSplineVFake}
    JSplineVFake {{curve i l 0.9958 k x5 0.95 0.8 x20 0.5 x40 0.3 x80 0.2 l x200 0.1}}
   }
-set N334c3880 [stack 0]
+set Nebb5500 [stack 0]
   Merge2 {
    inputs 2
    operation minus
@@ -203,7 +202,7 @@ set N334c3880 [stack 0]
    xpos 332
    ypos 218
   }
-push $N334c3880
+push $Nebb5500
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -222,7 +221,7 @@ push $N334c3880
    xpos 177
    ypos 446
   }
-push $N2facae00
+push $Neb74a80
   ShuffleCopy {
    inputs 2
    name ShuffleCopy1
@@ -257,20 +256,20 @@ push $N2facae00
    name Input
    xpos 0
   }
-set N33553c00 [stack 0]
+set Ncabbf880 [stack 0]
   Dot {
    name Dot1
    xpos 366
    ypos 5
   }
-set N33553880 [stack 0]
-push $N33553880
+set Ncabbf500 [stack 0]
+push $Ncabbf500
   Invert {
    name Invert1
    xpos 177
    ypos 34
   }
-push $N33553880
+push $Ncabbf500
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -302,7 +301,7 @@ push $N33553880
    addUserKnob {7 JSplineVFake}
    JSplineVFake {{curve i l 0.9958 k x5 0.95 0.8 x20 0.5 x40 0.3 x80 0.2 l x200 0.1}}
   }
-set N33552700 [stack 0]
+set Ncabbe380 [stack 0]
   Merge2 {
    inputs 2
    operation minus
@@ -310,7 +309,7 @@ set N33552700 [stack 0]
    xpos 332
    ypos 218
   }
-push $N33552700
+push $Ncabbe380
   Switch {
    inputs 2
    which {{"\[value parent.chew]>=0?0:1"}}
@@ -329,7 +328,7 @@ push $N33552700
    xpos 177
    ypos 446
   }
-push $N33553c00
+push $Ncabbf880
   ShuffleCopy {
    inputs 2
    name ShuffleCopy1
@@ -375,15 +374,15 @@ push $N33553c00
   xpos 104
   ypos 570
  }
-set N2f8e6000 [stack 0]
+set Ncac31c00 [stack 0]
  Dot {
   name Dot4
   xpos 104
   ypos 642
  }
-set N425d9c00 [stack 0]
-push $N2f8e6000
-push $N33273180
+set Ncac31880 [stack 0]
+push $Ncac31c00
+push $Ncb78f180
  Dot {
   name Dot8
   tile_color 0x949494ff
@@ -392,7 +391,7 @@ push $N33273180
   xpos 434
   ypos -318
  }
-set N425d9880 [stack 0]
+set Ncac31500 [stack 0]
  Copy {
   inputs 2
   from0 rgba.alpha
@@ -411,7 +410,7 @@ set N425d9880 [stack 0]
   xpos 400
   ypos 632
  }
-set N425d9180 [stack 0]
+set Ncac30e00 [stack 0]
  Blur {
   size {{blur}}
   name Blur1
@@ -419,7 +418,7 @@ set N425d9180 [stack 0]
   xpos 730
   ypos 625
  }
-push $N425d9880
+push $Ncac31500
  Dot {
   name Dot2
   tile_color 0x949494ff
@@ -442,9 +441,9 @@ push $N425d9880
   xpos 1170
   ypos 638
  }
-set N425d8000 [stack 0]
-push $N425d8000
-push $N33273500
+set Ncac5bc00 [stack 0]
+push $Ncac5bc00
+push $Ncb78f500
  Dot {
   name Dot7
   xpos 984
@@ -466,7 +465,7 @@ push $N33273500
   xpos 984
   ypos 978
  }
-set N42609500 [stack 0]
+set Ncac5b180 [stack 0]
  STMap {
   inputs 2
   uv rgb
@@ -475,20 +474,20 @@ set N42609500 [stack 0]
   xpos 1170
   ypos 961
  }
-push $N425d9c00
+push $Ncac31880
  Dot {
   name Dot5
   xpos 104
   ypos 714
  }
-set N42608e00 [stack 0]
+set Ncac5aa80 [stack 0]
  Dot {
   name Dot6
   xpos 104
   ypos 834
  }
-push $N42608e00
-push $N425d9180
+push $Ncac5aa80
+push $Ncac30e00
  Copy {
   inputs 2
   from0 rgba.alpha
@@ -524,8 +523,8 @@ push $N425d9180
   xpos 400
   ypos 1070
  }
-set N4263b880 [stack 0]
-push $N42609500
+set Ncac8b500 [stack 0]
+push $Ncac5b180
  Merge2 {
   inputs 2
   also_merge all
@@ -533,12 +532,13 @@ push $N42609500
   xpos 950
   ypos 1070
  }
-push $N4263b880
+push $Ncac8b500
  Switch {
   inputs 4
-  which {{modes}}
+  which {{output}}
   name Switch1
   label "Which: \[value which]"
+  selected true
   xpos 950
   ypos 1232
  }
@@ -546,5 +546,14 @@ push $N4263b880
   name Output1
   xpos 950
   ypos 1454
+ }
+ NoOp {
+  inputs 0
+  name Merge_Proxy
+  xpos 180
+  ypos 14
+  addUserKnob {20 User}
+  addUserKnob {4 operation1 M {atop average color-burn color-dodge conjoint-over copy difference disjoint-over divide exclusion from geometric hard-light hypot in mask matte max min minus multiply out over overlay plus screen soft-light stencil under xor ""}}
+  operation1 multiply
  }
 end_group
