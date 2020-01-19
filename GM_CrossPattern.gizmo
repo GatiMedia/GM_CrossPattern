@@ -4,7 +4,7 @@ Group {
  xpos 3150
  ypos -298
  addUserKnob {20 User}
- addUserKnob {4 output l Output M {"Only Pattern" "Pattern Over Image" "Distorted Image" STMap "" "" ""}}
+ addUserKnob {4 output l Output M {"Pattern Only" "Pattern Over Image" "Distorted Image" STMap "" ""}}
  addUserKnob {6 keep_alpha l "Keep Original Alpha" -STARTLINE}
  keep_alpha true
  addUserKnob {26 ""}
